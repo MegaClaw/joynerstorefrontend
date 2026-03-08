@@ -33,8 +33,8 @@ export default function Footer() {
   <div className="font-display font-bold tracking-[2px] uppercase mb-4 text-xs" style={{ color: 'var(--text-muted)' }}>Contact</div>
   <div className="flex gap-3">
     {[
-      { Icon: RiWhatsappLine, url: 'https://wa.me/1234567890' },
-      { Icon: RiInstagramLine, url: 'https://instagram.com/yourpage' },
+      { Icon: RiWhatsappLine, url: 'https://wa.me/918807997693' },
+      { Icon: RiInstagramLine, url: 'https://www.instagram.com/joyner_valorant_store' },
     ].map(({ Icon, url }, i) => (
       <a key={i} href={url} target="_blank" rel="noopener noreferrer">
         <div
