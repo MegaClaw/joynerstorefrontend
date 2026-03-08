@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --blue: #3b9eff;
+    --blue-dark: #1a6fcc;
+    --blue-glow: rgba(59, 158, 255, 0.4);
+    --bg1: #080c12;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --bg4: #16202e;
+    --border-blue: rgba(59, 158, 255, 0.2);
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --text: #e8e8f0;
+    --text-muted: #7a8a9a;
+    --text-dim: #3a4a5a;
+    --gold: #f0b429;
+    --font-display: 'Rajdhani', sans-serif;
+    --font-body: 'Barlow Condensed', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg1);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: var(--font-display); border: none; outline: none; }
+  input, select, textarea { font-family: var(--font-body); outline: none; }
+  img { max-width: 100%; display: block; }
+}
+
+@layer components {
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 0.75rem 2rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary:hover { box-shadow: 0 0 24px var(--blue-glow); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--blue);
+    padding: 0.65rem 1.8rem;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--blue);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: var(--blue);
+    color: white;
+    box-shadow: 0 0 20px var(--blue-glow);
+  }
+
+  .card-clip {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--blue);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(59,158,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,158,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.7rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  }
+
+  .rank-Iron     { color: #a0a0a0; border-color: #a0a0a055; background: #a0a0a022; }
+.rank-Bronze   { color: #e8922a; border-color: #e8922a55; background: #e8922a22; }
+.rank-Silver   { color: #d8d8d8; border-color: #d8d8d855; background: #d8d8d822; }
+.rank-Gold     { color: #ffd700; border-color: #ffd70055; background: #ffd70022; }
+.rank-Platinum { color: #00e5ff; border-color: #00e5ff55; background: #00e5ff22; }
+.rank-Diamond  { color: #c060ff; border-color: #c060ff55; background: #c060ff22; }
+.rank-Ascendant{ color: #00ff88; border-color: #00ff8855; background: #00ff8822; }
+.rank-Immortal { color: #ff6b6b; border-color: #ff6b6b55; background: #ff6b6b22; }
+.rank-Radiant  { color: #fff176; border-color: #fff17655; background: #fff17622; }
+  
+  .admin-input {
+    width: 100%;
+    background: var(--bg4);
+    border: 1px solid var(--border-subtle);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .admin-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 10px rgba(59,158,255,0.15);
+  }
+
+  .admin-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@layer utilities {
+  @keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-30px, 20px) scale(1.05); }
+  66% { transform: translate(20px, -30px) scale(0.95); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.08); }
+  66% { transform: translate(-20px, 30px) scale(0.92); }
+}
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, -40px) scale(1.1); }
+}
+@keyframes lineSlide {
+  0%, 100% { opacity: 0.1; transform: scaleY(0.8); }
+  50% { opacity: 0.4; transform: scaleY(1); }
+}
+@keyframes sweepLine {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+@keyframes particlePulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.8); }
+}
+@keyframes beamGrow {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+}
