@@ -71,15 +71,17 @@ export default function HomePage() {
       <section className="relative overflow-hidden min-h-screen flex items-center">
         {/* Video background */}
         <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.35, zIndex: 0 }}
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
+  autoPlay
+  loop
+  muted
+  playsInline
+  preload="none"
+  ref={el => { if (el) el.addEventListener('pause', () => el.play()); }}
+  className="absolute inset-0 w-full h-full object-cover"
+  style={{ opacity: 0.25, zIndex: 0 }}
+>
+  <source src="/hero-bg.mp4" type="video/mp4" />
+</video>
 
         {/* Dark overlay */}
         <div
@@ -178,7 +180,7 @@ export default function HomePage() {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
               className="font-display font-bold mb-6"
               style={{
                 fontSize: "clamp(3rem, 7vw, 6rem)",
@@ -201,7 +203,7 @@ export default function HomePage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
               className="text-xl mb-10 leading-8 max-w-lg"
               style={{ color: "#c0d0e0" }}
             >
@@ -213,7 +215,7 @@ export default function HomePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
               className="flex gap-4 flex-wrap"
             >
               <Link to="/accounts">
