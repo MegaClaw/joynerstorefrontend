@@ -44,6 +44,7 @@ const features = [
 export default function HomePage() {
   const [featured, setFeatured] = useState([]);
   const heroRef = useRef(null);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     getAccounts({ limit: 3, sort: "price_desc" })
@@ -60,6 +61,17 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {});
+    const handleVisibility = () => {
+      if (!document.hidden) video.play().catch(() => {});
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
   return (
     <div
       className="min-h-screen flex flex-col"
@@ -71,17 +83,17 @@ export default function HomePage() {
       <section className="relative overflow-hidden min-h-screen flex items-center">
         {/* Video background */}
         <video
-  autoPlay
-  loop
-  muted
-  playsInline
-  preload="none"
-  ref={el => { if (el) el.addEventListener('pause', () => el.play()); }}
-  className="absolute inset-0 w-full h-full object-cover"
-  style={{ opacity: 0.25, zIndex: 0 }}
->
-  <source src="/hero-bg.mp4" type="video/mp4" />
-</video>
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.25, zIndex: 0 }}
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
 
         {/* Dark overlay */}
         <div
@@ -172,7 +184,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="section-label"style={{ color: "#60b8ff", opacity: 1 }}>
+              <div className="section-label" style={{ color: "#60b8ff", opacity: 1 }}>
                 Joyner Valorant Store — Premium Accounts
               </div>
             </motion.div>
@@ -265,7 +277,10 @@ export default function HomePage() {
         </div>
 
         {/* Floating rank list */}
-        <div className="absolute right-[5%] top-1/2 -translate-y-1/2 flex-col gap-2 hidden lg:flex" style={{ zIndex: 10, opacity: 1 }}>
+        <div
+          className="absolute right-[5%] top-1/2 -translate-y-1/2 flex-col gap-2 hidden lg:flex"
+          style={{ zIndex: 10, opacity: 1 }}
+        >
           {RANKS.slice()
             .reverse()
             .map((rank, i) => (
@@ -276,15 +291,15 @@ export default function HomePage() {
                 transition={{ delay: 0.1 * i + 0.3 }}
               >
                 <span
-  className={`rank-badge rank-${rank}`}
-  style={{
-    fontSize: "0.7rem",
-    filter: "brightness(2) saturate(1.5)",
-    boxShadow: "0 0 12px currentColor",
-  }}
->
-  {rank}
-</span>
+                  className={`rank-badge rank-${rank}`}
+                  style={{
+                    fontSize: "0.7rem",
+                    filter: "brightness(2) saturate(1.5)",
+                    boxShadow: "0 0 12px currentColor",
+                  }}
+                >
+                  {rank}
+                </span>
               </motion.div>
             ))}
         </div>
